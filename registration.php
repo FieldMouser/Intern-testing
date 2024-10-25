@@ -9,17 +9,18 @@
     <h1>Регистрация</h1>
     <p>Для регистрации пользователя, введите необходимую информацию ниже</p>
     <form action="registration" method="post">
-        Введите имя пользователя <input type="text" name="name"> <br>
-
-        <label for="phone">Введите номер телефона </label>
+        <label for="username">Введите имя пользователя</label>
+        <input type="text" id="username" name="name" required> <br>
+        <label for="phone">Введите номер телефона</label>
         <input type="tel" id="phone" name="phone" pattern="\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}" placeholder="+7(123)-456-78-90" required maxlength="16" minlength="16">
-        <small>Формат: +8(123)-456-78-90</small> <br>
-
-        Введите адрес эл.почты <input type="email" name="email"> <br>
-        Введите пароль <input type="password" name="password" id=""> <br>
-        Повторите пароль <input type="password" name="passwordConfirm"> <br>
+        <small>Формат: +7(123)-456-78-90</small> <br>
+        <label for="email">Введите адрес эл.почты</label>
+        <input type="email" id="email" name="email" required> <br>
+        <label for="password">Введите пароль</label>
+        <input type="password" id="password" name="password" required> <br>
+        <label for="passwordConfirm">Повторите пароль</label>
+        <input type="password" id="passwordConfirm" name="passwordConfirm" required> <br>
         <button type="submit">Зарегистрироваться</button>
-        
     </form>
 </body>
 </html>
