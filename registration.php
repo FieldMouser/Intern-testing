@@ -2,10 +2,10 @@
 
     session_start();
 
-    $serverName = "localhost";
-    $username = "u2852904_Login_E";
-    $password = "Adm1n_L0g1n_3254";
-    $dbName = "u2852904_default";
+    $serverName = "...";
+    $username = "...";
+    $password = "...";
+    $dbName = "...";
 
 $conn = new mysqli($serverName, $username, $password, $dbName);
 if ($conn->connect_error) {
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $sql = "INSERT INTO users_for_test (name, phone, email, password) VALUES ('$name', '$phone', '$email', '$password')";
             if ($conn->query($sql) === TRUE) {
-                setcookie("name", $name, time() + 604800, "/");
+                setcookie("identifier", $name, time() + 604800, "/");
                 header("Location: index.php");
                 exit();
             } else {

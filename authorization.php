@@ -2,10 +2,10 @@
 
     session_start();
 
-    $serverName = "localhost";
-    $username = "u2852904_Login_E";
-    $password = "Adm1n_L0g1n_3254";
-    $dbName = "u2852904_default";
+    $serverName = "...";
+    $username = "...";
+    $password = "...";
+    $dbName = "...";
 
 // Подключение к базе данных
 $conn = new mysqli($serverName, $username, $password, $dbName);
