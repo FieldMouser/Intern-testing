@@ -30,13 +30,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($password !== $passwordConfirm) {
         $errorMessage = "Пароли не совпадают!";
     } else {
-        $sql = "INSERT INTO users_for_test (name, phone, email, password) VALUES ('$name', '$phone', '$email', '$password')";
-        if ($conn->query($sql) === TRUE) {
-            setcookie("name", $name, time() + 604800, "/");
-            header("Location: index.php");
-            exit(); // Обязательно завершай выполнение скрипта после переадресации
+        $sql = "SELECT * FROM users_for_test WHERE name = '$name' OR phone = '$phone' OR email = '$phone'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $errorMessage = "Пользователь с таким именем, телефоном или email уже существует!";
         } else {
-            $errorMessage = "Ошибка при регистрации: " . $conn->error;
+            $sql = "INSERT INTO users_for_test (name, phone, email, password) VALUES ('$name', '$phone', '$email', '$password')";
+            if ($conn->query($sql) === TRUE) {
+                setcookie("name", $name, time() + 604800, "/");
+                header("Location: index.php");
+                exit(); // Обязательно завершай выполнение скрипта после переадресации
+            } else {
+                $errorMessage = "Ошибка при регистрации: " . $conn->error;
+            }
         }
     }
 }
