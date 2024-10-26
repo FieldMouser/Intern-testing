@@ -7,7 +7,6 @@
     $password = "Adm1n_L0g1n_3254";
     $dbName = "u2852904_default";
 
-// Подключение к базе данных
 $conn = new mysqli($serverName, $username, $password, $dbName);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -22,15 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
     $passwordConfirm = trim($_POST['passwordConfirm']);
 
-    // Проверка на пустые поля
     if (empty($name) || empty($phone) || empty($email) || empty($password) || empty($passwordConfirm)) {
         $errorMessage = "Все поля обязательны для заполнения!";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errorMessage = "Неверный формат email!";
     } elseif ($password !== $passwordConfirm) {
         $errorMessage = "Пароли не совпадают!";
     } else {
-        $sql = "SELECT * FROM users_for_test WHERE name = '$name' OR phone = '$phone' OR email = '$phone'";
+        $sql = "SELECT * FROM users_for_test WHERE name = '$name' OR phone = '$phone' OR email = '$email'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $errorMessage = "Пользователь с таким именем, телефоном или email уже существует!";
@@ -39,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($conn->query($sql) === TRUE) {
                 setcookie("name", $name, time() + 604800, "/");
                 header("Location: index.php");
-                exit(); // Обязательно завершай выполнение скрипта после переадресации
+                exit();
             } else {
                 $errorMessage = "Ошибка при регистрации: " . $conn->error;
             }
